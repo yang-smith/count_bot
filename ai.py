@@ -3,7 +3,7 @@ import os
 from openai import OpenAI
 from prompt import prompt_sys
 
-async def ai_chat(message, model="gpt-3.5-turbo"):
+async def ai_chat(message, system_prompt=None, model="gpt-3.5-turbo"):
     client = OpenAI(
         # This is the default and can be omitted
         api_key=os.environ.get("OPENAI_API_KEY"),
@@ -14,7 +14,7 @@ async def ai_chat(message, model="gpt-3.5-turbo"):
         messages=[
             {
                 "role": "system", 
-                "content": prompt_sys
+                "content": system_prompt if system_prompt else prompt_sys
             },
             {
                 "role": "user",
